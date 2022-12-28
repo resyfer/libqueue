@@ -43,6 +43,7 @@ run: install
 
 install: $(NAME).so $(HEAD_DIR)/$(NAME).h
 	@echo "Installing..."
+	@sudo ldconfig $(LD_LIBRARY_PATH)
 	@sudo mkdir -p $(INCLUDE)/$(NAME)
 	@sudo cp -a $(HEAD_DIR)/. $(INCLUDE)/$(NAME)/
 	@sudo cp $(NAME).so $(LD_LIBRARY_PATH)
