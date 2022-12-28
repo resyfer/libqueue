@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <libqueue.h>
+#include <libqueue/libqueue.h>
 
 int main() {
 

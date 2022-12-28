@@ -1,5 +1,4 @@
 NAME:=libqueue
-S_NAME:=lqueue
 
 LD_LIBRARY_PATH:=/usr/local/lib
 INCLUDE:=/usr/local/include
@@ -44,8 +43,8 @@ run: install
 
 install: $(NAME).so $(HEAD_DIR)/$(NAME).h
 	@echo "Installing..."
-	@sudo ldconfig $(LD_LIBRARY_PATH)
-	@sudo cp $(HEAD_DIR)/$(NAME).h $(INCLUDE)
+	@sudo mkdir -p $(INCLUDE)/$(NAME)
+	@sudo cp -a $(HEAD_DIR)/. $(INCLUDE)/$(NAME)/
 	@sudo cp $(NAME).so $(LD_LIBRARY_PATH)
 	@echo "Done!"
 

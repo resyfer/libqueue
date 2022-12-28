@@ -12,7 +12,7 @@ Also, technically can hold any data type, including multiple ones at once (your 
 The shown below is a tl;dr version. Proper instructions are [here](#step-1)
 
 ```c
-#include <libqueue.h>
+#include <libqueue/libqueue.h>
 #include <stdio.h>
 
 int main() {
@@ -48,7 +48,7 @@ $ ./test.o
 Import the library:
 
 ```c
-#include <libqueue.h>
+#include <libqueue/libqueue.h>
 ```
 
 **NOTE**: Link the library when compiling
