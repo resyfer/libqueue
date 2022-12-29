@@ -1,9 +1,7 @@
 # libqueue
 
-A generic C library for a a queue. Pretty easy to use. For instructions on usage, please go [here](#usage).
+A generic C library for a a queue. Pretty easy to use and can hold any data type. For instructions on usage, please go [here](#usage).
 For installation, please go [here](#installation). For documentation, please go [here](#documentation).
-
-Also, technically can hold any data type, including multiple ones at once (your headache on which is of which data type when popped 😆).
 
 ## Usage
 
@@ -12,27 +10,28 @@ Also, technically can hold any data type, including multiple ones at once (your 
 The shown below is a tl;dr version. Proper instructions are [here](#step-1)
 
 ```c
-#include <libqueue/libqueue.h>
+#include <libqueue/queue.h>
 #include <stdio.h>
 
 int main() {
-  struct queue *q = queue_new();
 
-  int a = 10;
-  char *b = "Hello World";
+	queue_t *q = queue_new();
 
-  queue_push(q, (void*) &a);
-  queue_push(q, (void*) &b);
+	int a = 10;
+	char *b = "Hello World";
 
-  int *k = queue_pop(q);
-  char *l = queue_pop(q);
+	queue_push(q, (void*) &a);
+	queue_push(q, (void*) b);
 
-  printf("%d\n", *k);
-  printf("%s\n", l);
+	int *k = queue_pop(q);
+	char *l = queue_pop(q);
 
-  queue_free(q);
+	printf("%d\n", *k);
+	printf("%s\n", l);
 
-  return 0;
+	queue_free(q);
+
+	return 0;
 }
 ```
 
@@ -48,7 +47,7 @@ $ ./test.o
 Import the library:
 
 ```c
-#include <libqueue/libqueue.h>
+#include <libqueue/queue.h>
 ```
 
 **NOTE**: Link the library when compiling
@@ -62,7 +61,7 @@ $ gcc a.c -o a.o -lqueue
 Initialize an empty queue:
 
 ```c
-struct queue *q = queue_new();
+queue_t *q = queue_new();
 ```
 
 ### Step 3
@@ -109,31 +108,31 @@ Provide the password when prompted.
 ### Initialize
 
 ```c
-struct queue* queue_new();
+queue_t* queue_new();
 ```
 
 ### Push-Pop
 
 ```c
-void queue_push(struct queue *queue, void *value);
-void* queue_pop(struct queue *queue);
+void queue_push(queue_t *queue, void *value);
+void* queue_pop(queue_t *queue);
 ```
 
 ### Peek
 
 ```c
-void* queue_front(struct queue *queue);
-void* queue_back(struct queue *queue);
+void* queue_front(queue_t *queue);
+void* queue_back(queue_t *queue);
 ```
 
 ### Free
 
 ```c
-void queue_free(struct queue *queue);
+void queue_free(queue_t *queue);
 ```
 
 ### Misc
 
 ```c
-bool queue_empty(struct queue *queue); // Checks if queue is empty
+bool queue_empty(queue_t *queue); // Checks if queue is empty
 ```

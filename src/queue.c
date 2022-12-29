@@ -1,12 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <include/libqueue.h>
+#include <include/queue.h>
 
-struct queue *
+queue_t*
 queue_new()
 {
-	struct queue *new_queue = malloc(sizeof(struct queue));
+	queue_t *new_queue = malloc(sizeof(queue_t));
 	new_queue->head = NULL;
 	new_queue->tail = NULL;
 	new_queue->size = 0;
@@ -14,19 +14,19 @@ queue_new()
 }
 
 bool
-queue_empty(struct queue *queue)
+queue_empty(queue_t *queue)
 {
 	return queue->size == 0;
 }
 
 void
-queue_push(struct queue *queue, void *value)
+queue_push(queue_t *queue, void *value)
 {
 	if(!queue || !value) {
 		return;
 	}
 
-	struct queue_node *new_node = malloc(sizeof(struct queue_node));
+	queue_node_t *new_node = malloc(sizeof(queue_node_t));
 	new_node->value = value;
 	new_node->next = NULL;
 
@@ -42,7 +42,7 @@ queue_push(struct queue *queue, void *value)
 }
 
 void *
-queue_pop(struct queue *queue)
+queue_pop(queue_t *queue)
 {
 	if(!queue) {
 		return NULL;
@@ -52,7 +52,7 @@ queue_pop(struct queue *queue)
 		return NULL;
 	}
 
-	struct queue_node *elem = queue->head;
+	queue_node_t *elem = queue->head;
 	queue->head = queue->head->next;
 
 	void *value = elem->value;
@@ -68,7 +68,7 @@ queue_pop(struct queue *queue)
 }
 
 void *
-queue_front(struct queue *queue)
+queue_front(queue_t *queue)
 {
 	if(!queue) {
 		return NULL;
@@ -82,7 +82,7 @@ queue_front(struct queue *queue)
 }
 
 void *
-queue_back(struct queue *queue)
+queue_back(queue_t *queue)
 {
 	if(!queue) {
 		return NULL;
@@ -96,12 +96,12 @@ queue_back(struct queue *queue)
 }
 
 void
-queue_free(struct queue *queue)
+queue_free(queue_t *queue)
 {
-	struct queue_node *temp = queue->head;
+	queue_node_t *temp = queue->head;
 
 	while(temp) {
-		struct queue_node *temp2 = temp;
+		queue_node_t *temp2 = temp;
 		temp = temp->next;
 		free(temp2);
 	}

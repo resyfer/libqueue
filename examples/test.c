@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <libqueue/libqueue.h>
+#include <libqueue/queue.h>
 
 int main() {
 
-	struct queue *q = queue_new();
+	queue_t *q = queue_new();
 
 	int a = 10;
 	char *b = "Hello World";
