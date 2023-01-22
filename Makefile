@@ -2,6 +2,7 @@ NAME:=libqueue
 ENTRY:=queue
 MODE:=prod
 
+LD_FLAGS=-lqueue
 LD_LIBRARY_PATH:=/usr/local/lib
 INCLUDE:=/usr/local/include
 
@@ -19,6 +20,7 @@ TEST:=test
 EXAMPLE:=example
 
 SRCFILES:=$(shell find $(SRC_DIR) -type f -name "*.c")
+HEADERFILES:=$(shell find $(HEAD_DIR) -type f -name "*.h")
 OBJFILES := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCFILES))
 DEPFILES := $(patsubst $(SRC_DIR)/%.c,$(DEP_DIR)/%.d,$(SRCFILES))
 
@@ -48,12 +50,12 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR) 2> /dev/null
 
 test: install
-	@$(CC) $(CFLAGS) -o ./$(TEST_DIR)/$(TEST).o ./$(TEST_DIR)/$(TEST).c -lqueue
+	@$(CC) $(CFLAGS) -o ./$(TEST_DIR)/$(TEST).o ./$(TEST_DIR)/$(TEST).c $(LD_FLAGS)
 	@echo "------------"
 	@./$(TEST_DIR)/$(TEST).o
 
 run: install
-	@$(CC) $(CFLAGS) -o ./$(EXAMPLE_DIR)/$(TEST).o ./$(EXAMPLE_DIR)/$(EXAMPLE).c -lqueue
+	@$(CC) $(CFLAGS) -o ./$(EXAMPLE_DIR)/$(EXAMPLE).o ./$(EXAMPLE_DIR)/$(EXAMPLE).c $(LD_FLAGS)
 	@echo "------------"
 	@./$(EXAMPLE_DIR)/$(TEST).o
 
